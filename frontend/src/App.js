@@ -4,7 +4,7 @@ import Header from './Header';
 
 export default function App() {
   const [counter, setCounter] = useState(0);
-  
+
   function increment(){
     setCounter(counter + 1);
   }
