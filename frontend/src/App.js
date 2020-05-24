@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function App() {
+import Header from './Header';
+
+export default function App() {
+  const [counter, setCounter] = useState(0);
+  
+  function increment(){
+    setCounter(counter + 1);
+  }
+  function descrement(){
+    setCounter(counter - 1);
+  }
+
   return (
-    <h1>Hello world</h1>
+    <div>
+    <Header>contrador: {counter} </Header>
+    <button onClick={increment}>Incrementar</button>
+    <button onClick={descrement}>Descremente</button>
+    </div>
   );
 }
-
-export default App;
