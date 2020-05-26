@@ -12,21 +12,21 @@ export default function Profile() {
     const [incidents, setIncidents] = useState([]);
 
 
-    const history = useHistory();
-    const ongId =  localStorage.getItem('ongId');
-    const ongName =  localStorage.getItem('ongName');
+    const history   = useHistory();
+    const ongId     =  localStorage.getItem('ongId');
+    const ongName   =  localStorage.getItem('ongName');
+
     useEffect(() => {
         api.get('profile', {
-            headers:{
-                Authorization: ongId
+            headers: {
+                Authorization: ongId,
             }
-        }).then(response =>{
-            setIncidents(response.data)
+        }).then(response => {
+            setIncidents(response.data);
         })
-
     }, [ongId]);
 
-    async function handleDeleIncident(id) {
+    async function handleDeleteIncident(id) {
         try {
             await api.delete(`incidents/${id}`, {
                 headers: {
@@ -63,18 +63,16 @@ export default function Profile() {
             <ul>
                 {incidents.map(incident => (
                     <li key={incident.id}>
-                    <strong>CaSO:</strong>
+                    <strong>CASO:</strong>
                     <p>{incident.title}</p>
 
                     <strong>DESCRIÇÃO:</strong>
                     <p>{incident.description}</p>
 
                     <strong>VALOR:</strong>
-                    <p>
-                        {Intl.numberFormat('pt-BR', { style: 'currency', currency: 'BRL'})
-                        .format(incident.value)}
-                    </p>
-                    <button onClick={() => handleDeleIncident(incident.id)} type="button">
+                    <p> {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(incident.value)}</p>
+                    
+                    <button onClick={() => handleDeleteIncident(incident.id)} type="button">
                         <FiTrash2 size={20} color="#a8a8b3"/>
                     </button>
                 </li>
